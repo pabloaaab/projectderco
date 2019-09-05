@@ -1,6 +1,6 @@
 /*
 SQLyog Community v13.1.1 (64 bit)
-MySQL - 10.1.33-MariaDB : Database - bdproyectmetis
+MySQL - 10.1.33-MariaDB : Database - bdprojectderco
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 10.1.33-MariaDB : Database - bdproyectmetis
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`bdproyectmetis` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`bdprojectderco` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `bdproyectmetis`;
+USE `bdprojectderco`;
 
 /*Table structure for table `reporte` */
 
