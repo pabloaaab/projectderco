@@ -47,15 +47,15 @@ if (!Yii::$app->user->isGuest) {
                 'label' => 'Administracion',
                 'items' => [
                     ['label' => 'Proceso', 'url' => ['/proceso/index']],
-                    ['label' => 'Cliente', 'url' => ['/cliente/index']],
+                    //['label' => 'Cliente', 'url' => ['/cliente/index']],
                 ]
             ],
-            [
+            /*[
                 'label' => 'Bitacora',
                 'items' => [
                     ['label' => 'Consulta', 'url' => ['/reporte/index']],                    
                 ]
-            ],                        
+            ],*/                        
             [                
                 'label' => 'Configuración',
                 'items' => [

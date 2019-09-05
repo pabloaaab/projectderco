@@ -1,7 +1,7 @@
 {
-    "name": "metis",
-    "description": "Metis",
-    "keywords": ["yii2", "framework", "metis", "project template"],
+    "name": "derco",
+    "description": "Derco",
+    "keywords": ["yii2", "framework", "derco", "project template"],
     "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",

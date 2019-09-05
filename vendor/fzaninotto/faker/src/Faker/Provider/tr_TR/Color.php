@@ -13,7 +13,7 @@ class Color extends \Faker\Provider\Color
     );
 
     protected static $allColorNames = array(
-        'Alev kırmızısı', 'Alice mavisi', 'Alizarin', 'Altunî', 'Ametist', 'Armut',
+        'Alev kırmızısı', 'Alice mavisi', 'Alizarin', 'Altunî', 'Adercot', 'Armut',
         'Akuamarin', 'Asker yeşili', 'Bakır', 'Barut', 'Bataklık yeşili',
         'Bebek mavisi', 'Bej', 'Beyaz', 'Bondi mavisi', 'Bordo',
         'Bronz', 'Buğday', 'Burgonya', 'Camgöbeği', 'Çam yeşili', 'Çay yeşili',

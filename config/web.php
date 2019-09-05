@@ -4,7 +4,7 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'metis',
+    'id' => 'Derco',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language'=>'es', // Este es el lenguaje en el que querés que muestre las cosas
