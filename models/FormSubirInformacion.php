@@ -13,27 +13,27 @@ use yii\web\UploadedFile;
 
 class FormSubirInformacion extends Model
 {
-    public $imageFile;    
+    public $file;    
 
     public function rules()
     {
         return [
-            ['imageFile', 'required', 'message' => 'Campo requerido'],
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'xlsx'],            
+            ['file', 'required', 'message' => 'Campo requerido'],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'csv', 'checkExtensionByMimeType' => false,],            
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'imageFile' => 'Archivo de excel:',            
+            'file' => 'Archivo CSV:',            
         ];
     }
 
     public function upload()
     {
         if ($this->validate()) {
-            $this->imageFile->saveAs('upload/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            $this->file->saveAs('upload/' . $this->file->baseName . '.' . $this->file->extension);
             return true;
         } else {
             return false;

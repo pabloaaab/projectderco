@@ -7,10 +7,23 @@ use yii\widgets\LinkPager;
 $this->title = 'Subir Archivo';
 ?>
 
-<h1>Subir Archivo</h1>
-<h3 class="alert-success"><?= $msg ?></h3>
+<h1>Subir Información</h1>
+<?php if ($tipomsg == "danger") { ?>
+    <h3 class="alert-danger"><?= $msg ?></h3>
+<?php } else{
+    if (isset($_REQUEST['msg'])) { $dato = $_REQUEST['msg']; }else {$dato = $msg;}?>
+    
+    <h3 class="alert-success"><?= $dato ?></h3>       
+    
+<?php } ?>
+    
+<?php foreach ($msgerror as $val){ ?>
+            <?php echo "<h5 class='alert-danger'>".$val."</h5>" ?>          
+<?php } ?>    
+    
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-<?= $form->field($model, 'imageFile')->fileInput() ?>
+<br>    
+<?= $form->field($model, 'file')->fileInput() ?>
 
 <div class="row">
     <div class="col-lg-4">
