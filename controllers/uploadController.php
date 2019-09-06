@@ -25,6 +25,7 @@ use yii\web\UploadedFile;
         public function actionSubir()
         {
             $model = new FormSubirInformacion();
+            
             $msg = null;
             $msgerror[] = null;
             $conterror = 0;
@@ -34,6 +35,7 @@ use yii\web\UploadedFile;
                 $model->file = UploadedFile::getInstance($model, 'file');
                 if ($model->upload()) {
                     $handle = fopen('upload/'.$model->file, "r");
+                    
                      while (($fileop = fgetcsv($handle, 1000, ";")) !== false) 
                      {                        
                         $venta = new Venta();
@@ -48,8 +50,7 @@ use yii\web\UploadedFile;
                         } else {
                             $conterror = 1;
                             $msgerror[] = "El tipo de identificación no puede estar vacia en la fila " .$i;
-                        }
-                        
+                        }                        
                         $venta->cliNombres = $fileop[2];
                         $venta->cliApellidos = $fileop[3];
                         $venta->empresa = $fileop[4];
@@ -86,11 +87,7 @@ use yii\web\UploadedFile;
                      {                        
                         $venta->insert();
                         $msg = "Información importada correctamente"; 
-                        //return $this->redirect(['upload/subir','msg' => $msg]);
-                        return $this->redirect(array("upload/subir", "msg" => $msg));
-                        //Yii::$app->getSession()->setFlash('success', 'No se puede modificar la información, tiene detalles asociados');
-                        //$msg = "Información importada correctamente";
-                         
+                        //return $this->redirect(['upload/subir','msg' => $msg]);                                                                         
                      }else {
                         $msg = "Información no importada, por favor verificar!";
                         $tipomsg = "danger";
