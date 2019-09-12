@@ -46,8 +46,8 @@ if (!Yii::$app->user->isGuest) {
             [
                 'label' => 'Administracion',
                 'items' => [
-                    ['label' => 'Importar', 'url' => ['/upload/subir']],
-                    //['label' => 'Cliente', 'url' => ['/cliente/index']],
+                    ['label' => 'Importar Ventas', 'url' => ['/upload/venta']],
+                    ['label' => 'Importar PostVentas', 'url' => ['/upload/postventa']],
                 ]
             ],
             /*[

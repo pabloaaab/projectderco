@@ -8,38 +8,38 @@ use Yii;
  * This is the model class for table "venta".
  *
  * @property int $id
- * @property int $cliIdent
- * @property string $cliTipIdent
- * @property string $cliNombres
- * @property string $cliApellidos
- * @property string $empresa
- * @property string $cliSexo
- * @property string $cliCiuResidencia
- * @property string $cliDepResidencia
- * @property int $telefono1
- * @property int $telefono2
- * @property int $cliCelular
- * @property string $cliDirResidencia
- * @property string $cliEmail
- * @property string $vehVin
+ * @property string $nombres
+ * @property string $apellidos
+ * @property string $tipoIdentificacion
+ * @property int $identificacion
+ * @property string $sexo
+ * @property resource $ciudad
+ * @property int $telefonoOficina
+ * @property string $direccionOficina
+ * @property int $telefonoResidencia
+ * @property string $ciudadResidencia
+ * @property string $direccionResidencia
+ * @property string $correo
+ * @property int $telefonoCelular
  * @property string $vehMarca
- * @property string $vehVersion
- * @property int $vehModeloAnio
- * @property string $vehColor
- * @property string $vehPlaca
- * @property string $concNombre
- * @property string $nomSala
- * @property string $concCiudad
- * @property string $nomVendedor
- * @property string $fecEntVeh
- * @property string $fechaCarga
- * @property int $nFactura
- * @property int $nOrden
+ * @property string $placa
+ * @property string $vin
+ * @property string $tipoVehiculo
+ * @property string $version
+ * @property string $motor
+ * @property int $modelo
+ * @property string $color
+ * @property int $nroFactura
+ * @property string $fechaEntrega
+ * @property string $nombreConcesionario
+ * @property string $nombreVendedor
+ * @property string $nombreSalaVenta
+ * @property int $mesVenta
+ * @property string $nitEmpresa
+ * @property string $nom_contact_empresa
  * @property string $fechaNacimiento
  * @property string $estrato
  * @property string $estadoCivil
- * @property string $concatenado
- * @property int $codConcesionario
  */
 class Venta extends \yii\db\ActiveRecord
 {
@@ -57,16 +57,15 @@ class Venta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cliIdent', 'telefono1', 'telefono2', 'cliCelular', 'vehModeloAnio', 'nFactura', 'nOrden', 'codConcesionario'], 'integer'],
-            [['fecEntVeh', 'fechaCarga', 'fechaNacimiento'], 'safe'],
-            [['cliTipIdent', 'cliSexo', 'estrato', 'estadoCivil'], 'string', 'max' => 20],
-            [['cliNombres', 'cliApellidos', 'empresa', 'cliEmail', 'vehMarca', 'nomVendedor'], 'string', 'max' => 50],
-            [['cliCiuResidencia', 'cliDepResidencia'], 'string', 'max' => 25],
-            [['cliDirResidencia'], 'string', 'max' => 70],
-            [['vehVin', 'vehPlaca'], 'string', 'max' => 10],
-            [['vehVersion'], 'string', 'max' => 30],
-            [['vehColor', 'concNombre', 'nomSala', 'concCiudad'], 'string', 'max' => 40],
-            [['concatenado'], 'string', 'max' => 100],
+            [['identificacion', 'telefonoOficina', 'telefonoResidencia', 'telefonoCelular', 'modelo', 'nroFactura', 'mesVenta'], 'integer'],
+            [['fechaEntrega', 'fechaNacimiento'], 'safe'],
+            [['nombres', 'apellidos', 'ciudadResidencia', 'correo', 'vehMarca', 'vin', 'version', 'motor', 'nombreConcesionario', 'nombreVendedor', 'nombreSalaVenta', 'nom_contact_empresa'], 'string', 'max' => 50],
+            [['tipoIdentificacion', 'sexo', 'nitEmpresa', 'estadoCivil'], 'string', 'max' => 20],
+            [['ciudad', 'color'], 'string', 'max' => 40],
+            [['direccionOficina', 'direccionResidencia'], 'string', 'max' => 100],
+            [['placa'], 'string', 'max' => 10],
+            [['tipoVehiculo'], 'string', 'max' => 30],
+            [['estrato'], 'string', 'max' => 5],
         ];
     }
 
@@ -77,38 +76,38 @@ class Venta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'cliIdent' => 'Cli Ident',
-            'cliTipIdent' => 'Cli Tip Ident',
-            'cliNombres' => 'Cli Nombres',
-            'cliApellidos' => 'Cli Apellidos',
-            'empresa' => 'Empresa',
-            'cliSexo' => 'Cli Sexo',
-            'cliCiuResidencia' => 'Cli Ciu Residencia',
-            'cliDepResidencia' => 'Cli Dep Residencia',
-            'telefono1' => 'Telefono1',
-            'telefono2' => 'Telefono2',
-            'cliCelular' => 'Cli Celular',
-            'cliDirResidencia' => 'Cli Dir Residencia',
-            'cliEmail' => 'Cli Email',
-            'vehVin' => 'Veh Vin',
+            'nombres' => 'Nombres',
+            'apellidos' => 'Apellidos',
+            'tipoIdentificacion' => 'Tipo Identificacion',
+            'identificacion' => 'Identificacion',
+            'sexo' => 'Sexo',
+            'ciudad' => 'Ciudad',
+            'telefonoOficina' => 'Telefono Oficina',
+            'direccionOficina' => 'Direccion Oficina',
+            'telefonoResidencia' => 'Telefono Residencia',
+            'ciudadResidencia' => 'Ciudad Residencia',
+            'direccionResidencia' => 'Direccion Residencia',
+            'correo' => 'Correo',
+            'telefonoCelular' => 'Telefono Celular',
             'vehMarca' => 'Veh Marca',
-            'vehVersion' => 'Veh Version',
-            'vehModeloAnio' => 'Veh Modelo Anio',
-            'vehColor' => 'Veh Color',
-            'vehPlaca' => 'Veh Placa',
-            'concNombre' => 'Conc Nombre',
-            'nomSala' => 'Nom Sala',
-            'concCiudad' => 'Conc Ciudad',
-            'nomVendedor' => 'Nom Vendedor',
-            'fecEntVeh' => 'Fec Ent Veh',
-            'fechaCarga' => 'Fecha Carga',
-            'nFactura' => 'N Factura',
-            'nOrden' => 'N Orden',
+            'placa' => 'Placa',
+            'vin' => 'Vin',
+            'tipoVehiculo' => 'Tipo Vehiculo',
+            'version' => 'Version',
+            'motor' => 'Motor',
+            'modelo' => 'Modelo',
+            'color' => 'Color',
+            'nroFactura' => 'Nro Factura',
+            'fechaEntrega' => 'Fecha Entrega',
+            'nombreConcesionario' => 'Nombre Concesionario',
+            'nombreVendedor' => 'Nombre Vendedor',
+            'nombreSalaVenta' => 'Nombre Sala Venta',
+            'mesVenta' => 'Mes Venta',
+            'nitEmpresa' => 'Nit Empresa',
+            'nom_contact_empresa' => 'Nom Contact Empresa',
             'fechaNacimiento' => 'Fecha Nacimiento',
             'estrato' => 'Estrato',
             'estadoCivil' => 'Estado Civil',
-            'concatenado' => 'Concatenado',
-            'codConcesionario' => 'Cod Concesionario',
         ];
     }
 }

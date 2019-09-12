@@ -7,18 +7,16 @@ use yii\widgets\LinkPager;
 $this->title = 'Subir Archivo';
 ?>
 
-<h1>Subir Información</h1>
+<h1>Subir Información Postventa</h1>
 <?php if ($tipomsg == "danger") { ?>
     <h3 class="alert-danger"><?= $msg ?></h3>
 <?php } else{
-    if (isset($_REQUEST['msg'])) { $dato = $_REQUEST['msg']; }else {$dato = $msg;}?>
-    
-    <h3 class="alert-success"><?= $dato ?></h3>       
-    
+    if (isset($_REQUEST['msg'])) { $dato = $_REQUEST['msg']; }else {$dato = $msg;}?>   
+       <h3 class="alert-success"><?= $dato ?></h3>          
 <?php } ?>
     
 <?php foreach ($msgerror as $val){ ?>
-            <?php echo "<h5 class='alert-danger'>".$val."</h5>" ?>          
+    <?php echo "<h5 class='alert-danger'>".$val."</h5>" ?>          
 <?php } ?>    
     
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>

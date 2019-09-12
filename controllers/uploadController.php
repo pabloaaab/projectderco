@@ -22,72 +22,96 @@ use yii\web\UploadedFile;
 
     class UploadController extends Controller
     {              
-        public function actionSubir()
+        public function actionVenta()
         {
-            $model = new FormSubirInformacion();
-            
+            $model = new FormSubirInformacion();            
             $msg = null;
             $msgerror[] = null;
             $conterror = 0;
             $tipomsg = null;
             $i = 1;
+            $j = 1;
+            $k = 1;
             if (Yii::$app->request->isPost) {
                 $model->file = UploadedFile::getInstance($model, 'file');
                 if ($model->upload()) {
-                    $handle = fopen('upload/'.$model->file, "r");
-                    
+                    $handle = fopen('upload/'.$model->file, "r");                    
                      while (($fileop = fgetcsv($handle, 1000, ";")) !== false) 
-                     {                        
-                        $venta = new Venta();
-                        if ($fileop[0] <> '' And is_numeric($fileop[0]) ){
-                            $venta->cliIdent = $fileop[0];
-                        } else {
-                            $conterror = 1;
-                            $msgerror[] = "El número de identificación (".$fileop[0]. ") no es numérico ó esta vacio  en la fila " .$i;
+                     {
+                        if ($j > 1){ 
+                            if ($fileop[0] == '' Or ctype_digit($fileop[0]) ){
+                                $conterror = 1;
+                                $msgerror[] = "Los nombres (".$fileop[0]. ") tienen números ó esta vacio  en la fila " .$i;
+                            } 
+                            if ($fileop[1] == '' Or ctype_digit($fileop[1]) ){
+                                $conterror = 1;
+                                $msgerror[] = "Los apellidos (".$fileop[1]. ") tienen números ó esta vacio  en la fila " .$i;
+                            }
+                            if ($fileop[2] == '' Or ctype_digit($fileop[2]) ){
+                                $conterror = 1;
+                                $msgerror[] = "El tipo de identificación (".$fileop[2]. ") tiene números ó esta vacio  en la fila " .$i;
+                            } 
+                            if ($fileop[3] == '' Or !ctype_digit($fileop[3]) ){
+                                $conterror = 1;
+                                $msgerror[] = "El número de identificación (".$fileop[3]. ") tiene letras ó esta vacio  en la fila " .$i;
+                            }
                         }
-                        if ($fileop[1] <> ''){
-                            $venta->cliTipIdent = $fileop[1];
-                        } else {
-                            $conterror = 1;
-                            $msgerror[] = "El tipo de identificación no puede estar vacia en la fila " .$i;
-                        }                        
-                        $venta->cliNombres = $fileop[2];
-                        $venta->cliApellidos = $fileop[3];
-                        $venta->empresa = $fileop[4];
-                        $venta->cliSexo = $fileop[5];
-                        $venta->cliCiuResidencia = $fileop[6];
-                        $venta->cliDepResidencia = $fileop[7];
-                        $venta->telefono1 = $fileop[8];
-                        $venta->telefono2 = $fileop[9];
-                        $venta->cliCelular = $fileop[10];
-                        $venta->cliDirResidencia = $fileop[11];
-                        $venta->cliEmail = $fileop[12];
-                        $venta->vehVin = $fileop[13];
-                        $venta->vehMarca = $fileop[14];
-                        $venta->vehVersion = $fileop[15];
-                        $venta->vehModeloAnio = $fileop[16];
-                        $venta->vehColor = $fileop[17];
-                        $venta->vehPlaca = $fileop[18];
-                        $venta->concNombre = $fileop[19];
-                        $venta->nomSala = $fileop[20];
-                        $venta->concCiudad = $fileop[21];
-                        $venta->nomVendedor = $fileop[22];
-                        $venta->fecEntVeh = $fileop[23];
-                        $venta->fechaCarga = $fileop[24];
-                        $venta->nFactura = $fileop[25];
-                        $venta->nOrden = $fileop[26];
-                        $venta->fechaNacimiento = $fileop[27];
-                        $venta->estrato = $fileop[28];
-                        $venta->estadoCivil = $fileop[29];
-                        $venta->concatenado = $fileop[30];
-                        $venta->codConcesionario = $fileop[31];                                                                        
                         $i = $i + 1;
+                        $j = $j + 1;
                      }                     
                      if ($conterror == 0) 
                      {                        
-                        $venta->insert();
+                        $handle2 = fopen('upload/'.$model->file, "r");
+                         while (($fileop = fgetcsv($handle2, 1000, ";")) !== false) 
+                        {
+                            if ($k > 1){ 
+                                $venta = new Venta();
+                                $venta->nombres = $fileop[0];
+                                $venta->apellidos = $fileop[1];
+                                $venta->tipoIdentificacion = $fileop[2];                            
+                                $venta->identificacion = $fileop[3];                            
+                                $venta->sexo = $fileop[4];
+                                $venta->ciudad = $fileop[5];                            
+                                $venta->telefonoOficina = $fileop[6];
+                                $venta->direccionOficina = $fileop[7];
+                                $venta->telefonoResidencia = $fileop[8];
+                                $venta->ciudadResidencia = $fileop[9];
+                                $venta->direccionResidencia = $fileop[10];
+                                $venta->correo = $fileop[11];
+                                $venta->telefonoCelular = $fileop[12];
+                                $venta->vehMarca = $fileop[13];
+                                $venta->placa = $fileop[14];
+                                $venta->vin = $fileop[15];
+                                $venta->tipoVehiculo = $fileop[16];
+                                $venta->version = $fileop[17];
+                                $venta->motor = $fileop[18];
+                                $venta->modelo = $fileop[19];
+                                $venta->color = $fileop[20];
+                                $venta->nroFactura = $fileop[21];
+                                $fechaEntrega = explode('/', $fileop[22]);
+                                $diaEntrega =  $fechaEntrega[0];
+                                $mesEntrega =  $fechaEntrega[1];
+                                $anioEntrega = $fechaEntrega[2];
+                                $venta->fechaEntrega = $anioEntrega.'/'.$mesEntrega.'/'.$diaEntrega;
+                                $venta->nombreConcesionario = $fileop[23];
+                                $venta->nombreVendedor = $fileop[24];
+                                $venta->nombreSalaVenta = $fileop[25];
+                                $venta->mesVenta = $fileop[26];
+                                $venta->nitEmpresa = $fileop[27];
+                                $venta->nom_contact_empresa = $fileop[28];
+                                $fechaNacimiento = explode('/', $fileop[29]);
+                                $diaNacimiento =  $fechaNacimiento[0];
+                                $mesNacimiento =  $fechaNacimiento[1];
+                                $anioNacimiento = $fechaNacimiento[2];
+                                $venta->fechaNacimiento = $anioNacimiento.'/'.$mesNacimiento.'/'.$diaNacimiento;
+                                $venta->estrato = $fileop[30];
+                                $venta->estadoCivil = $fileop[31];
+                                $venta->save(false);
+                            }
+                            $k = $k + 1;
+                        }                        
                         $msg = "Información importada correctamente"; 
-                        //return $this->redirect(['upload/subir','msg' => $msg]);                                                                         
+                        return $this->redirect(['upload/venta','msg' => $msg]);                                                                         
                      }else {
                         $msg = "Información no importada, por favor verificar!";
                         $tipomsg = "danger";
@@ -98,6 +122,91 @@ use yii\web\UploadedFile;
                     $msg = "El Archivo no se pudo importar";
                 }
             }            
-            return $this->render("subir", ["model" => $model, "msg" => $msg, "tipomsg" => $tipomsg, "msgerror" => $msgerror]);
-        }                      
+            return $this->render("venta", ["model" => $model, "msg" => $msg, "tipomsg" => $tipomsg, "msgerror" => $msgerror]);
+        }
+        
+        public function actionPostventa()
+        {
+            $model = new FormSubirInformacion();            
+            $msg = null;
+            $msgerror[] = null;
+            $conterror = 0;
+            $tipomsg = null;
+            $i = 1;
+            $j = 1;
+            $k = 1;
+            if (Yii::$app->request->isPost) {
+                $model->file = UploadedFile::getInstance($model, 'file');
+                if ($model->upload()) {
+                    $handle = fopen('upload/'.$model->file, "r");                    
+                     while (($fileop = fgetcsv($handle, 1000, ";")) !== false) 
+                     {                                                
+                        if ($j > 1){
+                            if ($fileop[0] == ''){
+                                $conterror = 1;
+                                $msgerror[] = "El nombre del cliente (".$fileop[0]. ") esta vacio en la fila " .$i;
+                            } 
+                            if ($fileop[1] == ''){
+                                $conterror = 1;
+                                $msgerror[] = "La empresa (".$fileop[1]. ") esta vacio en la fila " .$i;
+                            }
+                            if ($fileop[2] == '' Or !ctype_digit($fileop[2]) ){
+                                $conterror = 1;
+                                $msgerror[] = "El número de identificación (".$fileop[2]. ") tiene letras ó esta vacio  en la fila " .$i;
+                            }                            
+                        }    
+                        $i = $i + 1;
+                        $j = $j + 1;
+                     }                     
+                     if ($conterror == 0) 
+                     {                        
+                        $handle2 = fopen('upload/'.$model->file, "r");
+                         while (($fileop = fgetcsv($handle2, 1000, ";")) !== false) 
+                        {
+                            if ($k > 1){
+                                $postventa = new Posventa();
+                                $postventa->nombresCliente = $fileop[0];
+                                $postventa->empresa = $fileop[1];
+                                $postventa->identificacion = $fileop[2];
+                                $postventa->usuario = $fileop[3];
+                                $postventa->marca = $fileop[4];
+                                $postventa->tipoVehiculo = $fileop[5];
+                                $postventa->anio = $fileop[6];
+                                $postventa->kilometraje = $fileop[7];
+                                $postventa->placaMatricula = $fileop[8];
+                                $postventa->vin = $fileop[9];
+                                $postventa->nroOrden = $fileop[10];                                
+                                $postventa->fechaOrden = date("Y-m-d",strtotime($fileop[11]));
+                                $postventa->nFactura = $fileop[12];                                
+                                $postventa->fechaFactura = date("Y-m-d",strtotime($fileop[13]));
+                                $postventa->telefono1 = $fileop[14];
+                                $postventa->telefono2 = $fileop[15];
+                                $postventa->extensionOficina = $fileop[16];
+                                $postventa->celular = $fileop[17];
+                                $postventa->ciudadOrigenTelefono = $fileop[18];
+                                $postventa->direccion = $fileop[19];
+                                $postventa->motivoIngresoTaller = $fileop[20];
+                                $postventa->motivoIngresoTaller2 = $fileop[21];
+                                $postventa->aseguradora = $fileop[22];
+                                $postventa->email = $fileop[23];
+                                $postventa->asesorServicio = $fileop[24];                                                                
+                                $postventa->autorizacionCliente = $fileop[25];
+                                $postventa->save(false);
+                            }    
+                            $k = $k + 1;
+                        }                        
+                        $msg = "Información importada correctamente"; 
+                        return $this->redirect(['upload/postventa','msg' => $msg]);                                                                         
+                     }else {
+                        $msg = "Información no importada, por favor verificar!";
+                        $tipomsg = "danger";
+                     }
+                     fclose($handle);
+                     unlink('upload/'.$model->file);
+                }else{
+                    $msg = "El Archivo no se pudo importar";
+                }
+            }            
+            return $this->render("postventa", ["model" => $model, "msg" => $msg, "tipomsg" => $tipomsg, "msgerror" => $msgerror]);
+        }
     }
