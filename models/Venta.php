@@ -58,7 +58,7 @@ class Venta extends \yii\db\ActiveRecord
     {
         return [
             [['identificacion', 'telefonoOficina', 'telefonoResidencia', 'telefonoCelular', 'modelo', 'nroFactura', 'mesVenta'], 'integer'],
-            [['fechaEntrega', 'fechaNacimiento'], 'safe'],
+            [['fechaEntrega', 'fechaNacimiento','fechaCarga'], 'safe'],
             [['nombres', 'apellidos', 'ciudadResidencia', 'correo', 'vehMarca', 'vin', 'version', 'motor', 'nombreConcesionario', 'nombreVendedor', 'nombreSalaVenta', 'nom_contact_empresa'], 'string', 'max' => 50],
             [['tipoIdentificacion', 'sexo', 'nitEmpresa', 'estadoCivil'], 'string', 'max' => 20],
             [['ciudad', 'color'], 'string', 'max' => 40],

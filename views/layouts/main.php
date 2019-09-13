@@ -44,18 +44,19 @@ if (!Yii::$app->user->isGuest) {
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],                        
             [
-                'label' => 'Administracion',
+                'label' => 'Importar',
                 'items' => [
-                    ['label' => 'Importar Ventas', 'url' => ['/upload/venta']],
-                    ['label' => 'Importar PostVentas', 'url' => ['/upload/postventa']],
+                    ['label' => 'Ventas', 'url' => ['/upload/venta']],
+                    ['label' => 'PostVentas', 'url' => ['/upload/postventa']],
                 ]
             ],
-            /*[
-                'label' => 'Bitacora',
+            [
+                'label' => 'Exportar',
                 'items' => [
-                    ['label' => 'Consulta', 'url' => ['/reporte/index']],                    
+                    ['label' => 'Ventas', 'url' => ['/download/venta']],
+                    ['label' => 'PostVentas', 'url' => ['/download/postventa']],
                 ]
-            ],*/                        
+            ],                        
             [                
                 'label' => 'Configuración',
                 'items' => [

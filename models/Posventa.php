@@ -52,7 +52,7 @@ class Posventa extends \yii\db\ActiveRecord
     {
         return [
             [['identificacion', 'anio', 'kilometraje', 'nroOrden', 'nFactura', 'telefono1', 'telefono2', 'extensionOficina'], 'integer'],
-            [['fechaOrden', 'fechaFactura'], 'safe'],
+            [['fechaOrden', 'fechaFactura','fechaCarga'], 'safe'],
             [['nombresCliente', 'empresa', 'usuario', 'marca', 'tipoVehiculo', 'vin', 'ciudadOrigenTelefono', 'email', 'asesorServicio'], 'string', 'max' => 50],
             [['placaMatricula'], 'string', 'max' => 30],
             [['celular'], 'string', 'max' => 25],
