@@ -17,6 +17,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $sede;
     public $fechacreacion;
     public $perfil;
+    public $id_concesionario;
 
     public static function isUserAdmin($id)
     {

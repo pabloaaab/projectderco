@@ -61,7 +61,8 @@ $this->title = 'Usuarios';
                 <th scope="col">Usuario</th>
                 <th scope="col">Nombre Completo</th>
                 <th scope="col">Email</th>
-                <th scope="col">Perfil</th>                
+                <th scope="col">Perfil</th>
+                <th scope="col">Concesionario</th>
                 <th scope="col">Fecha Creación</th>                
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -75,7 +76,8 @@ $this->title = 'Usuarios';
                 <td><?= $val->username ?></td>                                
                 <td><?= $val->nombrecompleto ?></td>
                 <td><?= $val->email ?></td>
-                <td><?= $val->perfil ?></td>                
+                <td><?= $val->perfil ?></td>
+                <td><?= $val->concesionario->concesionario ?></td>
                 <td><?= $val->fechacreacion ?></td>
                 <td><a href="<?= Url::toRoute(["site/editar", "id" => $val->id]) ?>" ><img src="svg/si-glyph-document-edit.svg" align="center" width="20px" height="20px" title="Editar"></a></td>                                
                 <td><?= Html::a('Cambio Clave', ["site/changepassword", "id" => $val->id], ['class' => 'btn btn-default']) ?></td>                                

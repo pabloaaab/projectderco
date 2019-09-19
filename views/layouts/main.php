@@ -42,7 +42,14 @@ if (!Yii::$app->user->isGuest) {
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-center'],
         'items' => [
-            ['label' => 'Inicio', 'url' => ['/site/index']],                        
+            //['label' => 'Inicio', 'url' => ['/site/index']],                        
+            [
+                'label' => 'Administración',
+                'items' => [
+                    ['label' => 'Concesionarios', 'url' => ['/concesionario/index']],
+                    //['label' => 'Cliente', 'url' => ['/cliente/index']],
+                ]
+            ],
             [
                 'label' => 'Importar',
                 'items' => [

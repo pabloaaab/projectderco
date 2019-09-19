@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use app\models\Concesionario;
 
 $this->title = 'Nuevo Usuario';
 ?>
@@ -22,6 +23,9 @@ $this->title = 'Nuevo Usuario';
 ]);
 
 ?>
+<?php
+$concesionario = ArrayHelper::map(Concesionario::find()->all(), 'id', 'concesionario');
+?>    
     <div class="row">
         <div class="col-lg-3">
             <?= $form->field($model, "username")->input("text") ?>
@@ -30,6 +34,7 @@ $this->title = 'Nuevo Usuario';
             <?= $form->field($model, "password_repeat")->input("password") ?>
             <?= $form->field($model, "nombrecompleto")->input("text") ?>
             <?= $form->field($model, 'perfil')->dropdownList(['1' => 'usuario', '2' => 'Administrador'], ['prompt' => 'Seleccione...']) ?>            
+            <?= $form->field($model, 'id_concesionario')->dropDownList($concesionario, ['prompt' => 'Seleccione un concesionario...']) ?>
         </div>
     </div>
     

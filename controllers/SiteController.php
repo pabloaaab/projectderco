@@ -160,7 +160,8 @@ class SiteController extends Controller
                 if ($table->role == 2){
                         $perfil = "Administrador"; 
                 }                
-                $table->perfil = $perfil;                
+                $table->perfil = $perfil;
+                $table->id_concesionario = $model->id_concesionario;
                 //Si el registro es guardado correctamente
                 if ($table->insert())
                 {
@@ -204,6 +205,7 @@ class SiteController extends Controller
                         $perfil = "Usuario";
                     }
                     $table->perfil = $perfil;
+                    $table->id_concesionario = $model->id_concesionario;
                     if ($table->save(false)) {
                         $msg = "El registro ha sido actualizado correctamente";
                         return $this->redirect(["site/usuarios"]);
@@ -228,6 +230,7 @@ class SiteController extends Controller
                 $model->role = $table->role;                
                 $model->email = $table->email;
                 $model->activo = $table->activate;
+                $model->id_concesionario = $table->id_concesionario;
             } else {
                 return $this->redirect(["site/usuarios"]);
             }
@@ -341,43 +344,6 @@ class SiteController extends Controller
 
         //return $this->goHome();
         return $this->redirect(["site/login"]);
-    }
-    
-    public function actionGeneraracceso() {
-        ob_clean();
-        $matriculasabiertas = Matriculados::find()->where(['=', 'estado2', 'abierta'])->orderBy('consecutivo desc')->all();
-        $count = count($matriculasabiertas);
-        $mensaje = "";
-        if(Yii::$app->request->post()) {
-            foreach ($matriculasabiertas as $val){
-                $registrado = Users::find()->where(['=','username',$val->identificacion])->one();
-                if ($registrado){
-                    
-                }else{
-                    $inscrito = Inscritos::find()->where(['=','identificacion',$val->identificacion])->one();
-                    $table = new Users;
-                    $table->username = $inscrito->identificacion;
-                    $table->email = $inscrito->email;
-                    //Encriptamos el password
-                    $table->password = crypt($table->username, Yii::$app->params["salt"]);
-                    //Creamos una cookie para autenticar al usuario cuando decida recordar la sesión, esta misma
-                    //clave será utilizada para activar el usuario
-                    $table->authKey = $this->randKey("abcdef0123456789", 200);
-                    //Creamos un token de acceso único para el usuario
-                    $table->accessToken = $this->randKey("abcdef0123456789", 200);
-                    $table->activate = 1;
-                    $table->nombrecompleto = $inscrito->nombre1.' '.$inscrito->nombre2.' '.$inscrito->apellido1.' '.$inscrito->apellido2;
-                    $table->role = 4;                    
-                    $perfil = "Usuario";                     
-                    $table->perfil = $perfil;                                        
-                    $table->insert();                    
-                }                                
-            }
-        }
-
-        return $this->render('generaracceso', [            
-
-        ]);
-    }
+    }        
 
 }

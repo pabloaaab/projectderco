@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use app\models\Concesionario;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
@@ -23,7 +24,9 @@ $form = ActiveForm::begin([
             ],
         ]);
 ?>
-
+<?php
+$concesionario = ArrayHelper::map(Concesionario::find()->all(), 'id', 'concesionario');
+?> 
 <div class="panel panel-primary">
     <div class="panel-heading">
         Información Usuario
@@ -44,10 +47,13 @@ $form = ActiveForm::begin([
         <div class="row">            
             <?= $form->field($model, 'activo')->dropdownList(['1' => 'ACTIVO', '0' => 'INACTIVO'], ['prompt' => 'Seleccione el estado del usuario']) ?>
         </div>
+        <div class="row">
+            <?= $form->field($model, 'id_concesionario')->dropDownList($concesionario, ['prompt' => 'Seleccione un concesionario...']) ?>
+        </div>
         <div class="panel-footer text-right">            
             <a href="<?= Url::toRoute("site/usuarios") ?>" class="btn btn-primary"><span class='glyphicon glyphicon-circle-arrow-left'></span> Regresar</a>    
             <?= Html::submitButton("<span class='glyphicon glyphicon-floppy-disk'></span> Guardar", ["class" => "btn btn-success",]) ?>
-        </div>
+        </div>        
     </div>
 </div>
 <?php ActiveForm::end(); ?>    

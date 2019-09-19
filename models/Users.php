@@ -15,5 +15,13 @@ class Users extends ActiveRecord{
     {
         return 'users';
     }
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getConcesionario()
+    {
+        return $this->hasOne(Concesionario::className(), ['id' => 'id_concesionario']);
+    }
 
 }

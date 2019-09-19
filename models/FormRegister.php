@@ -13,11 +13,12 @@ class FormRegister extends model{
     public $password_repeat;
     public $nombrecompleto;    
     public $perfil;
+    public $id_concesionario;
     
     public function rules()
     {
         return [
-            [['username', 'email', 'password', 'password_repeat','nombrecompleto','perfil'], 'required', 'message' => 'Campo requerido'],
+            [['username', 'email', 'password', 'password_repeat','nombrecompleto','perfil','id_concesionario'], 'required', 'message' => 'Campo requerido'],
             ['username', 'match', 'pattern' => "/^.{1,50}$/", 'message' => 'Mínimo 3 y máximo 50 caracteres'],
             ['username', 'match', 'pattern' => "/^[0-9a-z]+$/i", 'message' => 'Sólo se aceptan letras y números'],
             ['username', 'username_existe'],
@@ -62,6 +63,7 @@ class FormRegister extends model{
             'password_repeat' => 'Confirmar Clave:',            
             'nombrecompleto' => 'Nombre Completo:',
             'perfil' => 'Perfil:',
+            'id_concesionario' => 'Concesionario:',
         ];
     }
 

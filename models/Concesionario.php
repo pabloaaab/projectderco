@@ -9,6 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $concesionario
+ *
+ * @property Users[] $users
  */
 class Concesionario extends \yii\db\ActiveRecord
 {
@@ -39,5 +41,13 @@ class Concesionario extends \yii\db\ActiveRecord
             'id' => 'ID',
             'concesionario' => 'Concesionario',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(Users::className(), ['id_concesionario' => 'id']);
     }
 }
