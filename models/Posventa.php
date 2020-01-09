@@ -8,32 +8,41 @@ use Yii;
  * This is the model class for table "posventa".
  *
  * @property int $id
- * @property string $nombresCliente
+ * @property string $identificacion
+ * @property string $tipoIdentificacion
+ * @property string $nombres
+ * @property string $apellidos
  * @property string $empresa
- * @property int $identificacion
- * @property string $usuario
- * @property string $marca
- * @property string $tipoVehiculo
- * @property int $anio
- * @property int $kilometraje
- * @property string $placaMatricula
- * @property string $vin
- * @property int $nroOrden
- * @property string $fechaOrden
- * @property int $nFactura
- * @property string $fechaFactura
+ * @property string $sexo
+ * @property string $ciudadResidencia
+ * @property string $dptoResidencia
  * @property int $telefono1
  * @property int $telefono2
- * @property int $extensionOficina
- * @property string $celular
- * @property string $ciudadOrigenTelefono
- * @property string $direccion
- * @property string $motivoIngresoTaller
- * @property string $motivoIngresoTaller2
- * @property string $aseguradora
+ * @property int $celular
+ * @property string $direccionResidencia
  * @property string $email
- * @property string $asesorServicio
- * @property string $autorizacionCliente
+ * @property string $vehVin
+ * @property string $vehMarca
+ * @property string $vehVersion
+ * @property int $vehModelo
+ * @property string $vehColor
+ * @property string $vehPlaca
+ * @property string $nombreConcesionario
+ * @property string $nombreSalaVenta
+ * @property string $concCiudad
+ * @property string $nombreVendedor
+ * @property string $fechaEntrega
+ * @property string $fechaCarga
+ * @property string $nroFactura
+ * @property string $nroOrden
+ * @property int $kilometraje
+ * @property string $motivoIngreso
+ * @property string $tipificacionIngreso
+ * @property string $fechaNacimiento
+ * @property string $estrato
+ * @property string $estadoCivil
+ * @property string $concatenado
+ * @property string $codConcesionario
  */
 class Posventa extends \yii\db\ActiveRecord
 {
@@ -51,14 +60,16 @@ class Posventa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['identificacion', 'anio', 'kilometraje', 'nroOrden', 'nFactura', 'telefono1', 'telefono2', 'extensionOficina'], 'integer'],
-            [['fechaOrden', 'fechaFactura','fechaCarga'], 'safe'],
-            [['nombresCliente', 'empresa', 'usuario', 'marca', 'tipoVehiculo', 'vin', 'ciudadOrigenTelefono', 'email', 'asesorServicio'], 'string', 'max' => 50],
-            [['placaMatricula'], 'string', 'max' => 30],
-            [['celular'], 'string', 'max' => 25],
-            [['direccion', 'motivoIngresoTaller', 'motivoIngresoTaller2'], 'string', 'max' => 100],
-            [['aseguradora'], 'string', 'max' => 20],
-            [['autorizacionCliente'], 'string', 'max' => 10],
+            [['telefono1', 'telefono2', 'celular', 'vehModelo', 'kilometraje'], 'integer'],
+            [['fechaEntrega', 'fechaCarga', 'fechaNacimiento'], 'safe'],
+            [['identificacion'], 'string', 'max' => 15],
+            [['tipoIdentificacion', 'sexo', 'nroFactura', 'nroOrden', 'estadoCivil'], 'string', 'max' => 20],
+            [['nombres', 'apellidos', 'ciudadResidencia', 'dptoResidencia', 'email', 'vehVin', 'vehMarca', 'vehVersion', 'nombreConcesionario', 'nombreSalaVenta', 'concCiudad', 'nombreVendedor', 'motivoIngreso', 'tipificacionIngreso'], 'string', 'max' => 50],
+            [['empresa'], 'string', 'max' => 12],
+            [['direccionResidencia'], 'string', 'max' => 100],
+            [['vehColor'], 'string', 'max' => 40],
+            [['vehPlaca', 'estrato'], 'string', 'max' => 10],
+            [['concatenado', 'codConcesionario'], 'string', 'max' => 25],
         ];
     }
 
@@ -69,32 +80,41 @@ class Posventa extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nombresCliente' => 'Nombres Cliente',
-            'empresa' => 'Empresa',
             'identificacion' => 'Identificacion',
-            'usuario' => 'Usuario',
-            'marca' => 'Marca',
-            'tipoVehiculo' => 'Tipo Vehiculo',
-            'anio' => 'Anio',
-            'kilometraje' => 'Kilometraje',
-            'placaMatricula' => 'Placa Matricula',
-            'vin' => 'Vin',
-            'nroOrden' => 'Nro Orden',
-            'fechaOrden' => 'Fecha Orden',
-            'nFactura' => 'N Factura',
-            'fechaFactura' => 'Fecha Factura',
+            'tipoIdentificacion' => 'Tipo Identificacion',
+            'nombres' => 'Nombres',
+            'apellidos' => 'Apellidos',
+            'empresa' => 'Empresa',
+            'sexo' => 'Sexo',
+            'ciudadResidencia' => 'Ciudad Residencia',
+            'dptoResidencia' => 'Dpto Residencia',
             'telefono1' => 'Telefono1',
             'telefono2' => 'Telefono2',
-            'extensionOficina' => 'Extension Oficina',
             'celular' => 'Celular',
-            'ciudadOrigenTelefono' => 'Ciudad Origen Telefono',
-            'direccion' => 'Direccion',
-            'motivoIngresoTaller' => 'Motivo Ingreso Taller',
-            'motivoIngresoTaller2' => 'Motivo Ingreso Taller2',
-            'aseguradora' => 'Aseguradora',
+            'direccionResidencia' => 'Direccion Residencia',
             'email' => 'Email',
-            'asesorServicio' => 'Asesor Servicio',
-            'autorizacionCliente' => 'Autorizacion Cliente',
+            'vehVin' => 'Veh Vin',
+            'vehMarca' => 'Veh Marca',
+            'vehVersion' => 'Veh Version',
+            'vehModelo' => 'Veh Modelo',
+            'vehColor' => 'Veh Color',
+            'vehPlaca' => 'Veh Placa',
+            'nombreConcesionario' => 'Nombre Concesionario',
+            'nombreSalaVenta' => 'Nombre Sala Venta',
+            'concCiudad' => 'Conc Ciudad',
+            'nombreVendedor' => 'Nombre Vendedor',
+            'fechaEntrega' => 'Fecha Entrega',
+            'fechaCarga' => 'Fecha Carga',
+            'nroFactura' => 'Nro Factura',
+            'nroOrden' => 'Nro Orden',
+            'kilometraje' => 'Kilometraje',
+            'motivoIngreso' => 'Motivo Ingreso',
+            'tipificacionIngreso' => 'Tipificacion Ingreso',
+            'fechaNacimiento' => 'Fecha Nacimiento',
+            'estrato' => 'Estrato',
+            'estadoCivil' => 'Estado Civil',
+            'concatenado' => 'Concatenado',
+            'codConcesionario' => 'Cod Concesionario',
         ];
     }
 }

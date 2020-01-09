@@ -54,14 +54,14 @@ if (!Yii::$app->user->isGuest) {
                 'label' => 'Importar',
                 'items' => [
                     ['label' => 'Ventas', 'url' => ['/upload/venta']],
-                    ['label' => 'PostVentas', 'url' => ['/upload/postventa']],
+                    ['label' => 'PosVentas', 'url' => ['/upload/posventa']],
                 ]
             ],
             [
                 'label' => 'Exportar',
                 'items' => [
                     ['label' => 'Ventas', 'url' => ['/download/venta']],
-                    ['label' => 'PostVentas', 'url' => ['/download/postventa']],
+                    ['label' => 'PosVentas', 'url' => ['/download/posventa']],
                 ]
             ],                        
             [                

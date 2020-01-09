@@ -19,14 +19,14 @@ class FormSubirInformacion extends Model
     {
         return [
             ['file', 'required', 'message' => 'Campo requerido'],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'csv', 'checkExtensionByMimeType' => false,],            
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'xls,xlsx', 'checkExtensionByMimeType' => false,],            
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'file' => 'Archivo CSV:',            
+            'file' => 'Archivo XLSX,XLS:',            
         ];
     }
 

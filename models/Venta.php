@@ -8,38 +8,38 @@ use Yii;
  * This is the model class for table "venta".
  *
  * @property int $id
+ * @property string $identificacion
+ * @property string $tipoIdentificacion
  * @property string $nombres
  * @property string $apellidos
- * @property string $tipoIdentificacion
- * @property int $identificacion
+ * @property string $empresa
  * @property string $sexo
- * @property resource $ciudad
- * @property int $telefonoOficina
- * @property string $direccionOficina
- * @property int $telefonoResidencia
  * @property string $ciudadResidencia
+ * @property string $dptoResidencia
+ * @property int $telefono1
+ * @property int $telefono2
+ * @property int $celular
  * @property string $direccionResidencia
- * @property string $correo
- * @property int $telefonoCelular
+ * @property string $email
+ * @property string $vehVin
  * @property string $vehMarca
- * @property string $placa
- * @property string $vin
- * @property string $tipoVehiculo
- * @property string $version
- * @property string $motor
- * @property int $modelo
- * @property string $color
- * @property int $nroFactura
- * @property string $fechaEntrega
+ * @property string $vehVersion
+ * @property int $vehModelo
+ * @property string $vehColor
+ * @property string $vehPlaca
  * @property string $nombreConcesionario
- * @property string $nombreVendedor
  * @property string $nombreSalaVenta
- * @property int $mesVenta
- * @property string $nitEmpresa
- * @property string $nom_contact_empresa
+ * @property string $concCiudad
+ * @property string $nombreVendedor
+ * @property string $fechaEntrega
+ * @property string $fechaCarga
+ * @property string $nroFactura
+ * @property string $nroOrden
  * @property string $fechaNacimiento
  * @property string $estrato
  * @property string $estadoCivil
+ * @property string $concatenado
+ * @property string $codConcesionario
  */
 class Venta extends \yii\db\ActiveRecord
 {
@@ -57,15 +57,16 @@ class Venta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['identificacion', 'telefonoOficina', 'telefonoResidencia', 'telefonoCelular', 'modelo', 'nroFactura', 'mesVenta'], 'integer'],
-            [['fechaEntrega', 'fechaNacimiento','fechaCarga'], 'safe'],
-            [['nombres', 'apellidos', 'ciudadResidencia', 'correo', 'vehMarca', 'vin', 'version', 'motor', 'nombreConcesionario', 'nombreVendedor', 'nombreSalaVenta', 'nom_contact_empresa'], 'string', 'max' => 50],
-            [['tipoIdentificacion', 'sexo', 'nitEmpresa', 'estadoCivil'], 'string', 'max' => 20],
-            [['ciudad', 'color'], 'string', 'max' => 40],
-            [['direccionOficina', 'direccionResidencia'], 'string', 'max' => 100],
-            [['placa'], 'string', 'max' => 10],
-            [['tipoVehiculo'], 'string', 'max' => 30],
-            [['estrato'], 'string', 'max' => 5],
+            [['telefono1', 'telefono2', 'celular', 'vehModelo'], 'integer'],
+            [['fechaEntrega', 'fechaCarga', 'fechaNacimiento'], 'safe'],
+            [['identificacion'], 'string', 'max' => 15],
+            [['tipoIdentificacion', 'sexo', 'nroFactura', 'nroOrden', 'estadoCivil'], 'string', 'max' => 20],
+            [['nombres', 'apellidos', 'ciudadResidencia', 'dptoResidencia', 'email', 'vehVin', 'vehMarca', 'vehVersion', 'nombreConcesionario', 'nombreSalaVenta', 'concCiudad', 'nombreVendedor'], 'string', 'max' => 50],
+            [['empresa'], 'string', 'max' => 12],
+            [['direccionResidencia'], 'string', 'max' => 100],
+            [['vehColor'], 'string', 'max' => 40],
+            [['vehPlaca', 'estrato'], 'string', 'max' => 10],
+            [['concatenado', 'codConcesionario'], 'string', 'max' => 25],
         ];
     }
 
@@ -76,38 +77,38 @@ class Venta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'identificacion' => 'Identificacion',
+            'tipoIdentificacion' => 'Tipo Identificacion',
             'nombres' => 'Nombres',
             'apellidos' => 'Apellidos',
-            'tipoIdentificacion' => 'Tipo Identificacion',
-            'identificacion' => 'Identificacion',
+            'empresa' => 'Empresa',
             'sexo' => 'Sexo',
-            'ciudad' => 'Ciudad',
-            'telefonoOficina' => 'Telefono Oficina',
-            'direccionOficina' => 'Direccion Oficina',
-            'telefonoResidencia' => 'Telefono Residencia',
             'ciudadResidencia' => 'Ciudad Residencia',
+            'dptoResidencia' => 'Dpto Residencia',
+            'telefono1' => 'Telefono1',
+            'telefono2' => 'Telefono2',
+            'celular' => 'Celular',
             'direccionResidencia' => 'Direccion Residencia',
-            'correo' => 'Correo',
-            'telefonoCelular' => 'Telefono Celular',
+            'email' => 'Email',
+            'vehVin' => 'Veh Vin',
             'vehMarca' => 'Veh Marca',
-            'placa' => 'Placa',
-            'vin' => 'Vin',
-            'tipoVehiculo' => 'Tipo Vehiculo',
-            'version' => 'Version',
-            'motor' => 'Motor',
-            'modelo' => 'Modelo',
-            'color' => 'Color',
-            'nroFactura' => 'Nro Factura',
-            'fechaEntrega' => 'Fecha Entrega',
+            'vehVersion' => 'Veh Version',
+            'vehModelo' => 'Veh Modelo',
+            'vehColor' => 'Veh Color',
+            'vehPlaca' => 'Veh Placa',
             'nombreConcesionario' => 'Nombre Concesionario',
-            'nombreVendedor' => 'Nombre Vendedor',
             'nombreSalaVenta' => 'Nombre Sala Venta',
-            'mesVenta' => 'Mes Venta',
-            'nitEmpresa' => 'Nit Empresa',
-            'nom_contact_empresa' => 'Nom Contact Empresa',
+            'concCiudad' => 'Conc Ciudad',
+            'nombreVendedor' => 'Nombre Vendedor',
+            'fechaEntrega' => 'Fecha Entrega',
+            'fechaCarga' => 'Fecha Carga',
+            'nroFactura' => 'Nro Factura',
+            'nroOrden' => 'Nro Orden',
             'fechaNacimiento' => 'Fecha Nacimiento',
             'estrato' => 'Estrato',
             'estadoCivil' => 'Estado Civil',
+            'concatenado' => 'Concatenado',
+            'codConcesionario' => 'Cod Concesionario',
         ];
     }
 }

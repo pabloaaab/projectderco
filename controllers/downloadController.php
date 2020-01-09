@@ -89,74 +89,81 @@ use yii\web\UploadedFile;
         $objPHPExcel->getActiveSheet()->getColumnDimension('AE')->setAutoSize(true);
         $objPHPExcel->getActiveSheet()->getColumnDimension('AF')->setAutoSize(true);        
         $objPHPExcel->setActiveSheetIndex(0)
-                    ->setCellValue('A1', 'Nombre')
-                    ->setCellValue('B1', 'Apellidos')
+                    ->setCellValue('A1', 'Id')
+                    ->setCellValue('B1', 'Número Identificacion')
                     ->setCellValue('C1', 'Tipo Identificación')
-                    ->setCellValue('D1', 'Número Identificacion')
-                    ->setCellValue('E1', 'Sexo')
-                    ->setCellValue('F1', 'Ciudad')                    
-                    ->setCellValue('G1', 'Tel Oficina')
-                    ->setCellValue('H1', 'Dirección Oficina')
-                    ->setCellValue('I1', 'Tel Residencia')
-                    ->setCellValue('J1', 'Ciudad Residencia')
-                    ->setCellValue('K1', 'Dirección Residencia')
-                    ->setCellValue('L1', 'Correo Electrónico')
-                    ->setCellValue('M1', 'Celular')
-                    ->setCellValue('N1', 'Veh Marca')
-                    ->setCellValue('O1', 'Placa')
-                    ->setCellValue('P1', 'VIN')
-                    ->setCellValue('Q1', 'Tipo Vehiculo')
-                    ->setCellValue('R1', 'Versión')
-                    ->setCellValue('S1', 'Motor')
-                    ->setCellValue('T1', 'Modelo')
-                    ->setCellValue('U1', 'Color')
-                    ->setCellValue('V1', 'Número Factura')
-                    ->setCellValue('W1', 'Fecha Entrega')
-                    ->setCellValue('X1', 'Nombre Concensionario')
-                    ->setCellValue('Y1', 'Nombre Vendedor')
-                    ->setCellValue('Z1', 'Nombre Sala Ventas')
-                    ->setCellValue('AA1', 'Mes Venta')
-                    ->setCellValue('AB1', 'Nit Empresa')
-                    ->setCellValue('AC1', 'Nombre Contacto Empresa')
-                    ->setCellValue('AD1', 'Fecha Nacimiento')
-                    ->setCellValue('AE1', 'Estrato')
-                    ->setCellValue('AF1', 'Estado Civil');        
+                    ->setCellValue('D1', 'Nombres')
+                    ->setCellValue('E1', 'Apellidos')
+                    ->setCellValue('F1', 'Empresa')
+                    ->setCellValue('G1', 'Sexo')                                        
+                    ->setCellValue('H1', 'Ciudad Residencia')       
+                    ->setCellValue('I1', 'Departamento Residencia')       
+                    ->setCellValue('J1', 'Telefono 1')
+                    ->setCellValue('K1', 'Telefono 2')
+                    ->setCellValue('L1', 'Celular')
+                    ->setCellValue('M1', 'Dirección Residencia')
+                    ->setCellValue('N1', 'Email')
+                    ->setCellValue('O1', 'Veh Vin')
+                    ->setCellValue('P1', 'Veh Marca')
+                    ->setCellValue('Q1', 'Veh Versión')
+                    ->setCellValue('R1', 'Veh Modelo Año')
+                    ->setCellValue('S1', 'Veh Color')
+                    ->setCellValue('T1', 'Veh Placa')
+                    ->setCellValue('U1', 'Concensionario Nombre')
+                    ->setCellValue('V1', 'Nombre Sala')
+                    ->setCellValue('W1', 'Concensionario Ciudad')
+                    ->setCellValue('X1', 'Nombre Vendedor')
+                    ->setCellValue('Y1', 'Fecha Entrega')                                        
+                    ->setCellValue('Z1', 'Fecha Carga')
+                    ->setCellValue('AA1', 'Número Factura')
+                    ->setCellValue('AB1', 'Número Orden')
+                    ->setCellValue('AC1', 'Fecha Nacimiento')                                                            
+                    ->setCellValue('AD1', 'Estrato')
+                    ->setCellValue('AE1', 'Estado Civil')   
+                    ->setCellValue('AF1', 'Concatenado')   
+                    ->setCellValue('AG1', 'Cod Concesionario');   
         $i = 2;
         
-        foreach ($model as $val) {                                    
+        foreach ($model as $val) {
+            if ($val->fechaNacimiento == "" or is_null($val->fechaNacimiento)){
+                $fechanac = "";        
+            }else{
+                $fechanac = date("d-m-Y",strtotime($val->fechaNacimiento));        
+            }
             $objPHPExcel->setActiveSheetIndex(0)
-                    ->setCellValue('A' . $i, $val->nombres)
-                    ->setCellValue('B' . $i, $val->apellidos)
+                    ->setCellValue('A' . $i, $val->id)
+                    ->setCellValue('B' . $i, $val->identificacion)
                     ->setCellValue('C' . $i, $val->tipoIdentificacion)
-                    ->setCellValue('D' . $i, $val->identificacion)
-                    ->setCellValue('E' . $i, $val->sexo)
-                    ->setCellValue('F' . $i, $val->ciudad)
-                    ->setCellValue('G' . $i, $val->telefonoOficina)
-                    ->setCellValue('H' . $i, $val->direccionOficina)
-                    ->setCellValue('I' . $i, $val->telefonoResidencia)
-                    ->setCellValue('J' . $i, $val->ciudadResidencia)
-                    ->setCellValue('K' . $i, $val->direccionResidencia)
-                    ->setCellValue('L' . $i, $val->correo)
-                    ->setCellValue('M' . $i, $val->telefonoCelular)
-                    ->setCellValue('N' . $i, $val->vehMarca)
-                    ->setCellValue('O' . $i, $val->placa)
-                    ->setCellValue('P' . $i, $val->vin)
-                    ->setCellValue('Q' . $i, $val->tipoVehiculo)
-                    ->setCellValue('R' . $i, $val->version)
-                    ->setCellValue('S' . $i, $val->motor)
-                    ->setCellValue('T' . $i, $val->modelo)
-                    ->setCellValue('U' . $i, $val->color)
-                    ->setCellValue('V' . $i, $val->nroFactura)
-                    ->setCellValue('W' . $i, date("d-m-Y",strtotime($val->fechaEntrega)))
-                    ->setCellValue('X' . $i, $val->nombreConcesionario)
-                    ->setCellValue('Y' . $i, $val->nombreVendedor)
-                    ->setCellValue('Z' . $i, $val->nombreSalaVenta)
-                    ->setCellValue('AA' . $i, $val->mesVenta)
-                    ->setCellValue('AB' . $i, $val->nitEmpresa)
-                    ->setCellValue('AC' . $i, $val->nom_contact_empresa)
-                    ->setCellValue('AD' . $i, date("d-m-Y",strtotime($val->fechaNacimiento)))
-                    ->setCellValue('AE' . $i, $val->estrato)
-                    ->setCellValue('AF' . $i, $val->estadoCivil);
+                    ->setCellValue('D' . $i, $val->nombres)
+                    ->setCellValue('E' . $i, $val->apellidos)
+                    ->setCellValue('F' . $i, $val->empresa)                    
+                    ->setCellValue('G' . $i, $val->sexo)
+                    ->setCellValue('H' . $i, $val->ciudadResidencia)
+                    ->setCellValue('I' . $i, $val->dptoResidencia)                    
+                    ->setCellValue('J' . $i, $val->telefono1)
+                    ->setCellValue('K' . $i, $val->telefono2)
+                    ->setCellValue('L' . $i, $val->celular)                    
+                    ->setCellValue('M' . $i, $val->direccionResidencia)
+                    ->setCellValue('N' . $i, $val->email)
+                    ->setCellValue('O' . $i, $val->vehVin)
+                    ->setCellValue('P' . $i, $val->vehMarca)                                        
+                    ->setCellValue('Q' . $i, $val->vehVersion)
+                    ->setCellValue('R' . $i, $val->vehModelo)
+                    ->setCellValue('S' . $i, $val->vehColor)
+                    ->setCellValue('T' . $i, $val->vehPlaca)
+                    ->setCellValue('U' . $i, $val->nombreConcesionario)
+                    ->setCellValue('V' . $i, $val->nombreSalaVenta)
+                    ->setCellValue('W' . $i, $val->concCiudad)
+                    ->setCellValue('X' . $i, $val->nombreVendedor)
+                    ->setCellValue('Y' . $i, date("d-m-Y",strtotime($val->fechaEntrega)))
+                    ->setCellValue('Z' . $i, date("d-m-Y",strtotime($val->fechaCarga)))                                        
+                    ->setCellValue('AA' . $i, $val->nroFactura)
+                    ->setCellValue('AB' . $i, $val->nroOrden)                    
+                    ->setCellValue('AC' . $i, $fechanac)                                        
+                    ->setCellValue('AD' . $i, $val->estrato)
+                    ->setCellValue('AE' . $i, $val->estadoCivil)
+                    ->setCellValue('AF' . $i, $val->concatenado)
+                    ->setCellValue('AG' . $i, $val->codConcesionario);            
             $i++;
         }
 
@@ -181,7 +188,7 @@ use yii\web\UploadedFile;
         
     }
     
-        public function actionPostventa() {
+        public function actionPosventa() {
         if (!Yii::$app->user->isGuest) {
             $form = new FormFiltroDownload;                        
             $fecha_enviado_desde = null;
@@ -202,7 +209,7 @@ use yii\web\UploadedFile;
                             ->andFilterWhere(['<=', 'fechaCarga', $dato2])                                                        
                             ->orderBy('fechaCarga desc');                    
                     $model = $table->all();
-                    $this->actionExcelpostventa($model);     
+                    $this->actionExcelposventa($model);     
                 } else {
                     $form->getErrors();
                 }
@@ -213,7 +220,7 @@ use yii\web\UploadedFile;
                 $model = $table->all();                 
             }
             
-            return $this->render('postventa', [
+            return $this->render('posventa', [
                         'model' => $model,
                         'form' => $form,                                                                       
             ]);
@@ -222,7 +229,7 @@ use yii\web\UploadedFile;
         }
     }
     
-        public function actionExcelpostventa($model) {
+        public function actionExcelposventa($model) {
         //$costoproducciondiario = CostoProduccionDiaria::find()->all();
         $objPHPExcel = new \PHPExcel();
         // Set document properties
@@ -301,12 +308,12 @@ use yii\web\UploadedFile;
             $i++;
         }
 
-        $objPHPExcel->getActiveSheet()->setTitle('ExportarPostVentas');
+        $objPHPExcel->getActiveSheet()->setTitle('ExportarPosVentas');
         $objPHPExcel->setActiveSheetIndex(0);
 
         // Redirect output to a client’s web browser (Excel2007)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="ExportarPostVentas.xlsx"');
+        header('Content-Disposition: attachment;filename="ExportarPosVentas.xlsx"');
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
