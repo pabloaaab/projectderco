@@ -195,6 +195,10 @@ use PHPExcel_Shared_Date;
                                 $conterror = 1;
                                 $msgerror[] = "El campo CiuResidencia (".$rowData[0][6]. ") no debe contener numero y/o no puede estar vacio, en la fila " .$row2;
                             }
+                            if (!ctype_alpha($rowData[0][7])){
+                                $conterror = 1;
+                                $msgerror[] = "El campo DepResidencia (".$rowData[0][7]. ") no debe contener numero en la fila " .$row2;
+                            }
                             if (ctype_alpha($rowData[0][8])){
                                 $conterror = 1;
                                 $msgerror[] = "El campo telefono1 (".$rowData[0][8]. ") tiene letras y/o carecteres diferentes a numeros en la fila " .$row2;
@@ -482,6 +486,10 @@ use PHPExcel_Shared_Date;
                             if ($rowData[0][6] == "" or !ctype_alpha($rowData[0][6])){
                                 $conterror = 1;
                                 $msgerror[] = "El campo CiuResidencia (".$rowData[0][6]. ") no debe contener numero y/o no puede estar vacio, en la fila " .$row2;
+                            }
+                            if (!ctype_alpha($rowData[0][7])){
+                                $conterror = 1;
+                                $msgerror[] = "El campo DepResidencia (".$rowData[0][7]. ") no debe contener numero en la fila " .$row2;
                             }
                             if (ctype_alpha($rowData[0][8])){
                                 $conterror = 1;

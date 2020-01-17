@@ -17,7 +17,7 @@ $this->title = 'Exportar Registros PostVentas';
 <h1>Exportar Registros PostVentas</h1>
 <?php $formulario = ActiveForm::begin([
     "method" => "get",
-    "action" => Url::toRoute("download/postventa"),
+    "action" => Url::toRoute("download/posventa"),
     "enableClientValidation" => true,
     'options' => ['class' => 'form-horizontal'],
     'fieldConfig' => [
